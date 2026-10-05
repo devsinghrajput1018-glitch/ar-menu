@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AR Menu Test</title>
+  <script type="module"
+    src="https://cdn.jsdelivr.net/npm/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <style>
+    body { margin: 0; font-family: sans-serif; text-align: center; }
+    h2 { padding: 12px; margin: 0; }
+  </style>
+</head>
+<body>
+  <h2>My First AR Dish Test</h2>
+  <model-viewer
+    src="https://modelviewer.dev/shared-assets/models/Astronaut.glb"
+    ios-src="https://modelviewer.dev/shared-assets/models/Astronaut.usdz"
+    ar ar-modes="webxr scene-viewer quick-look"
+    camera-controls auto-rotate
+    shadow-intensity="1"
+    style="width:100%; height:80vh;">
+    <button slot="ar-button"
+      style="position:absolute; bottom:16px; left:50%; transform:translateX(-50%); padding:12px 24px; font-size:16px;">
+      View on your table
+    </button>
+  </model-viewer>
+</body>
+</html>
