@@ -1,0 +1,25 @@
+{
+  "demo-cafe": {
+    "active": true,
+    "name": "Demo Cafe",
+    "dishes": [
+      {
+        "name": "Astronaut Special",
+        "price": "₹250",
+        "glb": "https://modelviewer.dev/shared-assets/models/Astronaut.glb",
+        "usdz": "https://modelviewer.dev/shared-assets/models/Astronaut.usdz"
+      },
+      {
+        "name": "Robot Platter",
+        "price": "₹300",
+        "glb": "https://modelviewer.dev/shared-assets/models/RobotExpressive.glb",
+        "usdz": ""
+      }
+    ]
+  },
+  "expired-cafe": {
+    "active": false,
+    "name": "Expired Cafe",
+    "dishes": []
+  }
+}
