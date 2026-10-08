@@ -1,68 +1,31 @@
 {
   "demo-cafe": {
-    "active": true,
     "name": "Demo Cafe",
-    "tagline": "Tap any dish to see it on your table",
-    "dishes": [
+    "menu": [
       {
-        "name": "Cheese Pizza",
-        "category": "Mains",
-        "price": "₹299",
-        "desc": "Hand-stretched base, tomato sauce, mozzarella, fresh basil.",
-        "glb": "models/pizza.glb",
-        "usdz": "",
-        "img": "images/pizza.png"
+        "id": "biryani",
+        "name": "Hyderabadi Biryani",
+        "price": "₹280",
+        "description": "Flavorful spiced rice dish cooked with aromatic herbs and fresh ingredients.",
+        "model": "models/biryani.glb",
+        "image": "images/biryani.png"
       },
       {
-        "name": "Veg Burger",
-        "category": "Mains",
-        "price": "₹179",
-        "desc": "Crisp patty, cheese slice, lettuce, tomato, sesame bun.",
-        "glb": "models/burger.glb",
-        "usdz": "",
-        "img": "images/burger.png"
+        "id": "burger",
+        "name": "Cheese Loaded Burger",
+        "price": "₹180",
+        "description": "Juicy grilled patty topped with melted cheddar, lettuce, and rich sauce.",
+        "model": "models/burger.glb",
+        "image": "images/burger.png"
       },
       {
-        "name": "Chicken Biryani",
-        "category": "Mains",
-        "price": "₹349",
-        "desc": "Slow-cooked basmati rice with spiced chicken and fresh herbs.",
-        "glb": "models/biryani.glb",
-        "usdz": "",
-        "img": "images/biryani.png"
-      },
-      {
-        "name": "French Fries",
-        "category": "Sides",
-        "price": "₹119",
-        "desc": "Golden, salted, served hot.",
-        "glb": "models/fries.glb",
-        "usdz": "",
-        "img": "images/fries.png"
-      },
-      {
-        "name": "Chocolate Shake",
-        "category": "Drinks",
-        "price": "₹189",
-        "desc": "Thick chocolate shake with whipped cream and a cherry.",
-        "glb": "models/chocolate_shake.glb",
-        "usdz": "",
-        "img": "images/chocolate_shake.png"
-      },
-      {
-        "name": "Chocolate Cake",
-        "category": "Desserts",
-        "price": "₹159",
-        "desc": "Layered chocolate sponge with glaze and cream.",
-        "glb": "models/chocolate_cake.glb",
-        "usdz": "",
-        "img": "images/chocolate_cake.png"
+        "id": "sushi",
+        "name": "Fresh Sushi Roll",
+        "price": "₹350",
+        "description": "Authentic sushi rolls served with soy sauce, wasabi, and pickled ginger.",
+        "model": "models/sushi.glb",
+        "image": "images/sushi.png"
       }
     ]
-  },
-  "expired-cafe": {
-    "active": false,
-    "name": "Expired Cafe",
-    "dishes": []
   }
 }
