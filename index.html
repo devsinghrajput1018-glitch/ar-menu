@@ -1,29 +1,162 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AR Menu Test</title>
-  <script type="module"
-    src="https://cdn.jsdelivr.net/npm/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <title>Menu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer/dist/model-viewer.min.js"></script>
   <style>
-    body { margin: 0; font-family: sans-serif; text-align: center; }
-    h2 { padding: 12px; margin: 0; }
+    :root {
+      --ink: #1d2b2a;
+      --paper: #fbfaf6;
+      --line: #e4e1d6;
+      --muted: #6d7673;
+      --accent: #f2a900;
+      --deep: #0f4c45;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--paper); color: var(--ink);
+           font-family: "Instrument Sans", system-ui, sans-serif; }
+    header { background: var(--deep); color: #fff; padding: 28px 20px 22px; }
+    header h1 { margin: 0; font-family: "DM Serif Display", serif; font-weight: 400; font-size: 34px; }
+    header p { margin: 6px 0 0; color: #bfd8d3; font-size: 15px; }
+    .wrap { max-width: 640px; margin: 0 auto; }
+
+    nav { position: sticky; top: 0; z-index: 5; background: var(--paper);
+          border-bottom: 1px solid var(--line); padding: 10px 16px; overflow-x: auto;
+          white-space: nowrap; }
+    nav button { font: inherit; font-size: 14px; font-weight: 500; padding: 8px 16px; margin-right: 6px;
+                 border: 1px solid var(--line); border-radius: 999px; background: #fff; color: var(--ink); cursor: pointer; }
+    nav button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: #fff; }
+
+    main { padding: 4px 16px 60px; }
+    .item { display: flex; align-items: center; gap: 14px; width: 100%; text-align: left;
+            padding: 14px 0; border: 0; border-bottom: 1px solid var(--line); background: none;
+            font: inherit; color: inherit; cursor: pointer; }
+    .item img { width: 84px; height: 84px; object-fit: contain; flex: none; }
+    .item .txt { flex: 1; min-width: 0; }
+    .item h3 { margin: 0; font-size: 17px; font-weight: 600; }
+    .item p { margin: 3px 0 8px; font-size: 14px; color: var(--muted); line-height: 1.35; }
+    .item .row { display: flex; align-items: center; gap: 12px; }
+    .price { font-weight: 600; font-size: 15px; }
+    .tag { font-size: 13px; font-weight: 600; color: var(--deep); background: #fff3cf;
+           padding: 4px 10px; border-radius: 999px; }
+    .msg { text-align: center; padding: 70px 24px; color: var(--muted); font-size: 18px; line-height: 1.5; }
+
+    dialog { border: 0; padding: 0; width: 100%; max-width: 640px; margin: auto auto 0; border-radius: 22px 22px 0 0;
+             background: var(--paper); color: var(--ink); }
+    dialog::backdrop { background: rgba(10, 25, 24, .55); }
+    #mv { width: 100%; height: 46vh; min-height: 280px; background: #eceae0; --poster-color: transparent; }
+    .sheet { padding: 16px 20px 24px; }
+    .sheet h2 { margin: 0; font-family: "DM Serif Display", serif; font-weight: 400; font-size: 26px; }
+    .sheet .meta { color: var(--muted); font-size: 15px; margin: 4px 0 14px; line-height: 1.4; }
+    .btns { display: flex; gap: 10px; }
+    .btns button { font: inherit; font-weight: 600; font-size: 16px; padding: 14px; border-radius: 12px; cursor: pointer; }
+    #ar { flex: 1; border: 0; background: var(--accent); color: #2a1d00; }
+    #close { border: 1px solid var(--line); background: #fff; color: var(--ink); padding: 14px 20px; }
+    #note { font-size: 13px; color: var(--muted); margin: 10px 0 0; display: none; }
+    button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
   </style>
 </head>
 <body>
-  <h2>My First AR Dish Test</h2>
-  <model-viewer
-    src="https://modelviewer.dev/shared-assets/models/Astronaut.glb"
-    ios-src="https://modelviewer.dev/shared-assets/models/Astronaut.usdz"
-    ar ar-modes="webxr scene-viewer quick-look"
-    camera-controls auto-rotate
-    shadow-intensity="1"
-    style="width:100%; height:80vh;">
-    <button slot="ar-button"
-      style="position:absolute; bottom:16px; left:50%; transform:translateX(-50%); padding:12px 24px; font-size:16px;">
-      View on your table
-    </button>
-  </model-viewer>
+  <header><div class="wrap">
+    <h1 id="title">Menu</h1>
+    <p id="tagline"></p>
+  </div></header>
+  <nav id="cats" class="wrap" hidden></nav>
+  <main class="wrap" id="menu"></main>
+
+  <dialog id="sheet">
+    <model-viewer id="mv" camera-controls auto-rotate shadow-intensity="1"
+      ar ar-modes="webxr scene-viewer quick-look" ar-scale="auto" interaction-prompt="none"></model-viewer>
+    <div class="sheet">
+      <h2 id="dname"></h2>
+      <div class="meta"><span id="dprice" style="font-weight:600;color:var(--ink)"></span> &middot; <span id="ddesc"></span></div>
+      <div class="btns">
+        <button id="ar">View on your table</button>
+        <button id="close">Close</button>
+      </div>
+      <p id="note">AR isn't available on this phone or browser. You can still turn the dish with your finger.</p>
+    </div>
+  </dialog>
+
+  <script>
+    const $ = id => document.getElementById(id);
+    const id = new URLSearchParams(location.search).get("r");
+    let dishes = [];
+
+    function message(text) {
+      $("title").textContent = "Menu";
+      $("tagline").textContent = "";
+      $("cats").hidden = true;
+      $("menu").innerHTML = '<div class="msg">' + text + '</div>';
+    }
+
+    function render(cat) {
+      $("menu").innerHTML = "";
+      dishes.forEach((d, i) => {
+        if (cat !== "All" && d.category !== cat) return;
+        const b = document.createElement("button");
+        b.className = "item";
+        b.innerHTML = `<img src="${d.img}" alt="" loading="lazy">
+          <span class="txt"><h3>${d.name}</h3><p>${d.desc || ""}</p>
+          <span class="row"><span class="price">${d.price}</span><span class="tag">View in 3D</span></span></span>`;
+        b.onclick = () => openDish(d);
+        $("menu").appendChild(b);
+      });
+    }
+
+    function openDish(d) {
+      const mv = $("mv");
+      mv.src = d.glb;
+      if (d.usdz) mv.setAttribute("ios-src", d.usdz); else mv.removeAttribute("ios-src");
+      $("dname").textContent = d.name;
+      $("dprice").textContent = d.price;
+      $("ddesc").textContent = d.desc || "";
+      $("note").style.display = "none";
+      $("sheet").showModal();
+    }
+
+    $("ar").onclick = () => {
+      const mv = $("mv");
+      if (mv.canActivateAR) mv.activateAR(); else $("note").style.display = "block";
+    };
+    $("close").onclick = () => $("sheet").close();
+    $("sheet").addEventListener("click", e => { if (e.target === $("sheet")) $("sheet").close(); });
+
+    if (!id) {
+      message("Please scan the QR code on your table.");
+    } else {
+      fetch("clients.json?t=" + Date.now())
+        .then(r => r.json())
+        .then(data => {
+          const c = data[id];
+          if (!c) return message("Menu not found.");
+          if (!c.active) return message("This menu is temporarily unavailable.<br>Please ask your server.");
+          document.title = c.name + " Menu";
+          $("title").textContent = c.name;
+          $("tagline").textContent = c.tagline || "";
+          dishes = c.dishes;
+          const cats = ["All", ...new Set(dishes.map(d => d.category))];
+          const nav = $("cats");
+          nav.hidden = false;
+          cats.forEach((cat, i) => {
+            const b = document.createElement("button");
+            b.textContent = cat;
+            b.setAttribute("aria-pressed", i === 0);
+            b.onclick = () => {
+              nav.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x === b));
+              render(cat);
+            };
+            nav.appendChild(b);
+          });
+          render("All");
+        })
+        .catch(() => message("Something went wrong. Please try again."));
+    }
+  </script>
 </body>
 </html>
