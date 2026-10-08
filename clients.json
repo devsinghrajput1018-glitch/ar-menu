@@ -1,31 +1,41 @@
 {
   "demo-cafe": {
+    "active": true,
     "name": "Demo Cafe",
-    "menu": [
+    "tagline": "Tap any dish to see it on your table",
+    "dishes": [
       {
-        "id": "biryani",
         "name": "Hyderabadi Biryani",
+        "category": "Mains",
         "price": "₹280",
-        "description": "Flavorful spiced rice dish cooked with aromatic herbs and fresh ingredients.",
-        "model": "models/biryani.glb",
-        "image": "images/biryani.png"
+        "desc": "Flavorful spiced rice cooked with aromatic herbs and fresh ingredients.",
+        "glb": "models/biryani.glb",
+        "usdz": "",
+        "img": ""
       },
       {
-        "id": "burger",
         "name": "Cheese Loaded Burger",
+        "category": "Mains",
         "price": "₹180",
-        "description": "Juicy grilled patty topped with melted cheddar, lettuce, and rich sauce.",
-        "model": "models/burger.glb",
-        "image": "images/burger.png"
+        "desc": "Juicy grilled patty topped with melted cheddar, lettuce and rich sauce.",
+        "glb": "models/burger.glb",
+        "usdz": "",
+        "img": ""
       },
       {
-        "id": "sushi",
-        "name": "Fresh Sushi Roll",
+        "name": "Sushi Platter",
+        "category": "Mains",
         "price": "₹350",
-        "description": "Authentic sushi rolls served with soy sauce, wasabi, and pickled ginger.",
-        "model": "models/sushi.glb",
-        "image": "images/sushi.png"
+        "desc": "Assorted sushi served with soy sauce, wasabi and pickled ginger.",
+        "glb": "models/sushi.glb",
+        "usdz": "",
+        "img": ""
       }
     ]
+  },
+  "expired-cafe": {
+    "active": false,
+    "name": "Expired Cafe",
+    "dishes": []
   }
 }
