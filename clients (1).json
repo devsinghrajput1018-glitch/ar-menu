@@ -1,0 +1,41 @@
+{
+  "demo-cafe": {
+    "active": true,
+    "name": "Demo Cafe",
+    "tagline": "Tap any dish to see it on your table",
+    "dishes": [
+      {
+        "name": "Cheese Loaded Burger",
+        "category": "Mains",
+        "price": "₹180",
+        "desc": "Juicy grilled patty with melted cheddar, lettuce, tomato and onion.",
+        "glb": "burger.glb",
+        "usdz": "",
+        "img": "burger.png"
+      },
+      {
+        "name": "Sushi Platter",
+        "category": "Mains",
+        "price": "₹350",
+        "desc": "Assorted nigiri and rolls with soy sauce, wasabi and pickled ginger.",
+        "glb": "sushi.glb",
+        "usdz": "",
+        "img": "sushi.jpg"
+      },
+      {
+        "name": "Hyderabadi Biryani",
+        "category": "Mains",
+        "price": "₹280",
+        "desc": "Slow-cooked basmati rice with spiced chicken and fresh herbs.",
+        "glb": "biryani.glb",
+        "usdz": "",
+        "img": "biryani.png"
+      }
+    ]
+  },
+  "expired-cafe": {
+    "active": false,
+    "name": "Expired Cafe",
+    "dishes": []
+  }
+}
